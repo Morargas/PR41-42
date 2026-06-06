@@ -1,5 +1,5 @@
 import * as messageService from '../services/messageService.js'
-
+//Функция получкения сообщений
 export async function getMessages(req, res, next) {
   try {
     const messages = await messageService.getMessages(req.params.id)
@@ -8,7 +8,7 @@ export async function getMessages(req, res, next) {
     next(error)
   }
 }
-
+//Создания сообщения
 export async function createMessage(req, res, next) {
     try {
         const message = await messageService.createMessage(
