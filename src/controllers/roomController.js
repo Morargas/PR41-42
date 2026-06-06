@@ -1,5 +1,5 @@
 import * as roomService from '../services/roomService.js'
-
+//Получение комнат (чата)
 export async function getRooms(req, res, next) {
   try {
     const rooms = await roomService.getRooms()
@@ -8,7 +8,7 @@ export async function getRooms(req, res, next) {
     next(error)
   }
 }
-
+//Получение комнат определенного пользователя
 export async function getMyRooms(req, res, next) {
   try {
     const roomIds = await roomService.getMyRooms(req.user.sub)
@@ -17,7 +17,7 @@ export async function getMyRooms(req, res, next) {
     next(error)
   }
 }
-
+//Комната по id
 export async function getRoomById(req, res, next) {
   try {
     const room = await roomService.getRoomById(req.params.id)
@@ -26,7 +26,7 @@ export async function getRoomById(req, res, next) {
     next(error)
   }
 }
-
+//Создания комнаты
 export async function createRoom(req, res, next) {
   try {
     const room = await roomService.createRoom(req.body.name, req.user.sub)
@@ -35,7 +35,7 @@ export async function createRoom(req, res, next) {
     next(error)
   }
 }
-
+//Удаления комнаты
 export async function deleteRoom(req, res, next) {
   try {
     await roomService.deleteRoom(req.params.id)
@@ -44,7 +44,7 @@ export async function deleteRoom(req, res, next) {
     next(error)
   }
 }
-
+//Подключения к чату
 export async function joinRoom(req, res, next) {
     try {
         await roomService.joinRoom(req.params.id, req.user.sub)
@@ -53,7 +53,7 @@ export async function joinRoom(req, res, next) {
         next(error)
     }
 }
-
+//Выход из него
 export async function leaveRoom(req, res, next) {
     try {
         await roomService.leaveRoom(req.params.id, req.user.sub)
