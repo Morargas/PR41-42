@@ -1,3 +1,4 @@
+//Создание обработчика ошибок, для обращения к нему
 const errorHandler = (err, req, res, next) => {
     if (err.isOperational) {
         return res.status(err.statusCode).json({
