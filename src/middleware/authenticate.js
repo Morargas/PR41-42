@@ -7,7 +7,7 @@ const JWKS = createRemoteJWKSet(
 );
 
 const ISSUER = `${config.supabase.url}/auth/v1`;
-
+//Функция авторизации
 export default async function authenticate(req, res, next) {
     const authHeader = req.headers.authorization;
 
@@ -16,7 +16,7 @@ export default async function authenticate(req, res, next) {
     }
 
     const token = authHeader.slice(7).trim();
-
+    //По токену
     try {
         const { payload } = await jwtVerify(token, JWKS, {
             issuer: ISSUER,
@@ -25,6 +25,7 @@ export default async function authenticate(req, res, next) {
 
         req.user = payload;
         next(); 
+    //При ошибке
     } catch (err) {
         console.error("JWT verify error:", err.message);
         return next(new AppError("Недействительный или истекший токен", 401));
