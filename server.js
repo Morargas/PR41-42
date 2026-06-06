@@ -10,7 +10,7 @@ import errorHandler from "./middlewares/errorHandler.js";
 
 const app = express();
 const server = http.createServer(app);
-
+//Сервер
 const io = new Server(server, {
     cors: {
         origin: "http://localhost:5173",
@@ -18,7 +18,7 @@ const io = new Server(server, {
         credentials: true,
     },
 });
-
+//Ссылка на локальный сервер
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
 
@@ -28,7 +28,7 @@ app.use("/api/rooms", roomRoutes);
 initializeSocket(io);
 
 app.use(errorHandler);
-
+//Порт сервера
 const PORT = config.port || 3000;
 server.listen(PORT, () => {
     console.log(`Сервер запущен на порту ${PORT}`);
