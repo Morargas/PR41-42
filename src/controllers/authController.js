@@ -1,5 +1,5 @@
 import * as authService from '../services/authService.js'
-
+//Функция регистрации
 export async function register(req, res, next) {
   try {
     const { email, password, name } = req.body
@@ -9,7 +9,7 @@ export async function register(req, res, next) {
     next(error)
   }
 }
-
+//Логина
 export async function login(req, res, next) {
   try {
     const { email, password } = req.body
@@ -19,7 +19,7 @@ export async function login(req, res, next) {
     next(error)
   }
 }
-
+//Выхода из аккаунта
 export async function logout(req, res, next) {
   try {
     const token = req.headers.authorization?.split(' ')[1]
@@ -32,7 +32,7 @@ export async function logout(req, res, next) {
     next(error)
   }
 }
-
+//получение данных о пользователе
 export async function getMe(req, res, next) {
   try {
     const user = await authService.getMe(req.user.sub)
