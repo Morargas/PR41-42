@@ -1,11 +1,11 @@
 import supabase from '../utils/supabase.js'
 import prisma from '../prisma/prismaClient.js'
 import AppError from '../utils/appError.js'
-
+//Функция регистрации
 export async function register(email, password, name) {
   const { data, error } = await supabase.auth.signUp({ email, password })
   if (error) throw new AppError(error.message, 400)
-
+  //Получение данных из Prisma
   const user = await prisma.user.create({
     data: {
       supabaseId: data.user.id,
@@ -16,19 +16,19 @@ export async function register(email, password, name) {
 
   return { user, session: data.session }
 }
-
+//Функция входа
 export async function login(email, password) {
   const { data, error } = await supabase.auth.signInWithPassword({ email, password })
   if (error) throw new AppError('Неверный электронный адрес или пароль', 401)
 
   return { session: data.session }
 }
-
+//Выхода
 export async function logout(accessToken) {
   const { error } = await supabase.auth.signOut(accessToken)
   if (error) throw new AppError(error.message, 400)
 }
-
+//Получения пользователя
 export async function getMe(supabaseId) {
   const user = await prisma.user.findUnique({
     where: { supabaseId },
