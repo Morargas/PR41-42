@@ -3,7 +3,7 @@ import * as roomController from '../controllers/roomController.js'
 import authenticate from '../middleware/authenticate.js'
 import { validate } from '../validators/auth.js'
 import { createRoomSchema } from '../validators/room.js'
-
+//Маршруты для чатов (комнат)
 const router = Router()
 
 router.get('/', roomController.getRooms)
